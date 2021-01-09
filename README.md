@@ -7,3 +7,4 @@ A full stack web application developed using Python, Django, SQL, HTML, Bootstra
 * Users can look up the top 100 animes of all time.
 
 Here is a video link to how the website works https://youtu.be/iNQox1sjDzY.
+The website has been deployed at https://my-entertainmentlst.herokuapp.com/login
