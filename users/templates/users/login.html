@@ -1,0 +1,28 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+<div class="text-center" style="padding: 100px">
+    <form ation="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <label>Username: </label>
+            <input type="text" name="username">
+        </div>
+        <br>
+        <div>
+            <label>Password: </label>
+            <input type="password" name="password">
+        </div>
+        <br>
+        <input type="submit" value="Login">
+    </form>
+    <p style="padding: 10px">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+</div>
+
+
+{% endblock %}

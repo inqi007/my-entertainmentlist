@@ -1,0 +1,49 @@
+{% extends "account/layout.html" %}
+
+{% block body %}
+
+<main class="container p-5">
+    <table class="table table-light">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th>Name</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <form action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="title" value="{{ result.title }}">
+                    <input type="hidden" name="score" value="{{ result.score }}">
+                    <td><button type="submit" class="btn btn-outline-success">Save</button></td>
+                </form>
+                <form action="{% url 'later' %}" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="watchlater" value="{{ result.title }}">
+                    <td><button type="submit" class="btn btn-outline-warning">Watch Later</button></td>
+                </form>
+                    <td>{{ result.title }}</td>
+                    <td>{{ result.score }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+<div class="text-center row justify-content-evenly">
+    <form class="col-2" action="{% url 'search' %}" method="GET">
+        {% csrf_token %}
+        <input type="hidden">
+        <button class="btn btn-primary" type="submit">Prev</button>
+    </form>
+    <form class="col-2" action="{% url 'next' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="nextpage">
+        <button class="btn btn-primary" style="margin-bottom: 80px" type="submit">Next</button>
+    </form>
+</div>
+
+{% endblock %}

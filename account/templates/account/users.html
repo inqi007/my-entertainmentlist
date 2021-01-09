@@ -1,0 +1,56 @@
+{% extends "account/layout.html" %}
+
+{% block body %}
+
+<h1 class="text-center">Welcome, {{ request.user.username }} </h1>
+
+<div class="row justify-content-evenly">
+    <main class="container p-5 col-6">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th>Anime (Watched)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for favorite in favorites %}
+                <tr>
+                    <form action="{% url 'remove' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete" value="{{ favorite.name }}">
+                        <td>{{ favorite.name }}</td>
+                        <td><button type="submit" class="btn btn-outline-danger">Delete</button></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <main class="container p-5 col-6">
+        <table class="table table-light">
+            <thead>
+                <tr>
+                    <th>Anime (Will Watch)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for watch in later %}
+                <tr>
+                    <form action="{% url 'remove' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="delete1" value="{{ watch.title }}">
+                        <td>{{ watch.title }}</td>
+                        <td><button type="submit" class="btn btn-outline-danger">Delete</button></td>
+                    </form>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<a href="{% url 'logout' %}">Log Out</a>
+
+{% endblock %}

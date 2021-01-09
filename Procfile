@@ -1,0 +1,1 @@
+web: gunicorn my_entertainment_list.wsgi --log-file -
